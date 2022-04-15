@@ -1,0 +1,4 @@
+name: Transmute
+version: '${project.version}'
+main: me.marenji.transmute
+api-version: 1.18
