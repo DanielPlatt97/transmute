@@ -1,4 +1,9 @@
 name: Transmute
 version: '${project.version}'
-main: me.marenji.transmute
+main: me.marenji.TransmutePlugin
 api-version: 1.18
+commands:
+  maxhealth:
+    description: Set the health of a single player
+  maxhealthall:
+    description: Set the health of all players
