@@ -25,20 +25,14 @@ public class BlockBreakListener implements Listener {
         var player = event.getPlayer();
 
         var itemHeld = player.getInventory().getItemInMainHand();
-        if (itemHeld == null) {
-            return;
-        }
+        if (itemHeld == null) return;
 
         var itemHeldType = itemHeld.getType();
-        if (itemHeldType != Material.GOLDEN_PICKAXE) {
-            return;
-        };
+        if (itemHeldType != Material.GOLDEN_PICKAXE) return;
 
         var blockBrokenType = event.getBlock().getType();
         var transmutable = transmutableManager.getTransmutable(blockBrokenType);
-        if (transmutable == null) {
-            return;
-        };
+        if (transmutable == null) return;
 
         transmutable.transmute(event);
     }

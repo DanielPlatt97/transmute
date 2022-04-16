@@ -1,7 +1,6 @@
 package me.marenji.transmutables;
 
 import me.marenji.util.ConfigHelper;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 
 import java.util.HashMap;
@@ -10,22 +9,15 @@ public final class TransmutableManager {
 
     private static TransmutableManager single_instance = null;
 
-    private HashMap<Material, HeartTransmutable> heartTransmutables;
-    private HashMap<Material, TreasureTransmutable> treasureTransmutables;
+    private HashMap<Material, HeartTransmutable> heartTransmutablesByMaterial;
+    private HashMap<Integer, HeartTransmutable> heartTransmutablesByLevel;
+    private HashMap<Material, TreasureTransmutable> treasureTransmutablesByMaterial;
 
     private TransmutableManager()
     {
         var heartTransmutables = ConfigHelper.getHeartTransmutables();
         var treasureTransmutables = ConfigHelper.getTreasureTransmutables();
-
-        this.heartTransmutables = new HashMap<Material, HeartTransmutable>();
-        this.treasureTransmutables = new HashMap<Material, TreasureTransmutable>();
-        for (var heartTransmutable: heartTransmutables) {
-            this.heartTransmutables.put(heartTransmutable.getMaterial(), heartTransmutable);
-        }
-        for (var treasureTransmutable: treasureTransmutables) {
-            this.treasureTransmutables.put(treasureTransmutable.getMaterial(), treasureTransmutable);
-        }
+        initHashMaps(heartTransmutables, treasureTransmutables);
     }
 
     public static TransmutableManager getInstance()
@@ -36,7 +28,17 @@ public final class TransmutableManager {
         return single_instance;
     }
 
-
+    private void initHashMaps(Iterable<HeartTransmutable> heartTransmutables, Iterable<TreasureTransmutable> treasureTransmutables) {
+        this.heartTransmutablesByMaterial = new HashMap<>();
+        this.treasureTransmutablesByMaterial = new HashMap<>();
+        for (var heartTransmutable: heartTransmutables) {
+            this.heartTransmutablesByMaterial.put(heartTransmutable.getMaterial(), heartTransmutable);
+            this.heartTransmutablesByLevel.put(heartTransmutable.getLevelRequired(), heartTransmutable);
+        }
+        for (var treasureTransmutable: treasureTransmutables) {
+            this.treasureTransmutablesByMaterial.put(treasureTransmutable.getMaterial(), treasureTransmutable);
+        }
+    }
 
     public Transmutable getTransmutable(Material material) {
         if (isHeartTransmutable(material)) {
@@ -50,20 +52,46 @@ public final class TransmutableManager {
         return null;
     }
 
+    public HeartTransmutable getHeartTransmutableByLevel(int level) {
+        if (levelHasHeartTransmutable(level)) {
+            return getHeartTransmutable(level);
+        }
+
+        return null;
+    }
+
+    public String getNextHeartTransmutableMessage(int level) {
+        var nextHeartTransmutable = getHeartTransmutableByLevel(level);
+
+        if (nextHeartTransmutable == null) {
+            return "You are max level. You cannot gain more hearts.";
+        }
+
+        return "You must destroy a " + nextHeartTransmutable.getDisplayName() + " with a Golden Pickaxe to gain another heart.";
+    }
+
+    private boolean levelHasHeartTransmutable(int heartLevel) {
+        return heartTransmutablesByLevel.containsKey(heartLevel);
+    }
+
     private boolean isHeartTransmutable(Material material) {
-        return heartTransmutables.containsKey(material);
+        return heartTransmutablesByMaterial.containsKey(material);
     }
 
     private boolean isTreasureTransmutable(Material material) {
-        return treasureTransmutables.containsKey(material);
+        return treasureTransmutablesByMaterial.containsKey(material);
     }
 
     private HeartTransmutable getHeartTransmutable(Material material) {
-        return heartTransmutables.get(material);
+        return heartTransmutablesByMaterial.get(material);
+    }
+
+    private HeartTransmutable getHeartTransmutable(int heartLevel) {
+        return heartTransmutablesByLevel.get(heartLevel);
     }
 
     private TreasureTransmutable getTreasureTransmutable(Material material) {
-        return treasureTransmutables.get(material);
+        return treasureTransmutablesByMaterial.get(material);
     }
 
 }

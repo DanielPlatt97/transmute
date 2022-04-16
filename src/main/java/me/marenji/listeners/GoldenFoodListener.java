@@ -1,7 +1,7 @@
 package me.marenji.listeners;
 
 import me.marenji.TransmutePlugin;
-import me.marenji.health.PlayerHealthManager;
+import me.marenji.player.PlayerHealthManager;
 import me.marenji.tribute.DiamondTribute;
 import me.marenji.tribute.EmeraldTribute;
 import me.marenji.tribute.TributeFactory;

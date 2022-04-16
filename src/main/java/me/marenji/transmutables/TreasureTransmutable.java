@@ -9,8 +9,8 @@ public class TreasureTransmutable extends Transmutable{
     // higher quality increases the probability of getting a better treasure
     private int quality;
 
-    public TreasureTransmutable(Material material, int quality) {
-        super(material);
+    public TreasureTransmutable(Material material, String displayName, int quality) {
+        super(material, displayName);
         this.quality = quality;
     }
 

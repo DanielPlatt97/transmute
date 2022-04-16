@@ -1,6 +1,6 @@
 package me.marenji.tribute;
 
-import me.marenji.health.PlayerHealthManager;
+import me.marenji.player.PlayerHealthManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 

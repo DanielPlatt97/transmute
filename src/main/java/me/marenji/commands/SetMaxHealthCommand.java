@@ -1,7 +1,7 @@
 package me.marenji.commands;
 
 import me.marenji.TransmutePlugin;
-import me.marenji.health.PlayerHealthManager;
+import me.marenji.player.PlayerHealthManager;
 import me.marenji.util.ChatHelper;
 import me.marenji.util.PermissionsHelper;
 import org.bukkit.Bukkit;

@@ -1,4 +1,4 @@
-package me.marenji.health;
+package me.marenji.player;
 
 import me.marenji.util.ConfigHelper;
 import org.bukkit.Bukkit;
@@ -64,12 +64,20 @@ public final class PlayerHealthManager {
         }
     }
 
+    public boolean addHearts(Player player, int hearts) {
+        return changeHearts(player, hearts);
+    }
+
+    public boolean subtractHearts(Player player, int hearts) {
+        return changeHearts(player, -hearts);
+    }
+
     public boolean applyDefaultHeartLoss(Player player) {
-        return changeHearts(player, -defaultHeartChange);
+        return subtractHearts(player, defaultHeartChange);
     }
 
     public boolean applyDefaultHeartGain(Player player) {
-        return changeHearts(player, defaultHeartChange);
+        return addHearts(player, defaultHeartChange);
     }
 
     public int getMaxHearts(Player player) {

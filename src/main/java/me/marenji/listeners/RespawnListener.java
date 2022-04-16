@@ -1,7 +1,7 @@
 package me.marenji.listeners;
 
 import me.marenji.TransmutePlugin;
-import me.marenji.health.PlayerHealthManager;
+import me.marenji.player.PlayerHealthManager;
 import me.marenji.util.ChatHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

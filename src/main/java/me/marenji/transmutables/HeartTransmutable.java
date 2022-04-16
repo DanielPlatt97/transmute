@@ -10,8 +10,8 @@ public class HeartTransmutable extends Transmutable {
     private final int levelRequired;
     private final int heartsGained;
 
-    public HeartTransmutable(Material material, int levelRequired, int heartsGained) {
-        super(material);
+    public HeartTransmutable(Material material, String displayName, int levelRequired, int heartsGained) {
+        super(material, displayName);
         this.levelRequired = levelRequired;
         this.heartsGained = heartsGained;
     }
@@ -26,14 +26,13 @@ public class HeartTransmutable extends Transmutable {
 
     public void transmute(BlockBreakEvent event) {
         var player = event.getPlayer();
-        if (playerHealthManager.getMaxHearts(player) != levelRequired) {
-            player.sendMessage(ChatHelper.chat("Wrong level"));
-            return;
-        }
+        if (playerHealthManager.getMaxHearts(player) != levelRequired) return;
 
-        lightningStrikePlayer(player);
-        playerHealthManager.applyDefaultHeartGain(player);
-        player.sendMessage(ChatHelper.chat("Level up"));
+        event.setDropItems(false);
+
+        lightningStrikeBlock(event.getBlock());
+        playerHealthManager.addHearts(player, heartsGained);
+        messagePlayer.sendNextHeartMessage(player);
     }
 
 }

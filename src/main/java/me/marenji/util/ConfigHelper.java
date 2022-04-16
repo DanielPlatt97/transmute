@@ -20,8 +20,10 @@ public final class ConfigHelper {
             var material = Material.valueOf((String)map.get("material"));
             var levelRequired = (int)map.get("levelRequired");
             var heartsGained = (int)map.get("heartsGained");
+            var displayName = (String)map.get("displayName");
             var transmutable = new HeartTransmutable(
                 material,
+                displayName,
                 levelRequired,
                 heartsGained
             );
@@ -38,9 +40,11 @@ public final class ConfigHelper {
         for (var map: mapList) {
             var material = Material.valueOf((String)map.get("material"));
             var quality = (int)map.get("quality");
+            var displayName = (String)map.get("displayName");
             var transmutable = new TreasureTransmutable(
-                    material,
-                    quality
+                material,
+                displayName,
+                quality
             );
             Bukkit.getLogger().info("transmutable: material=" + material.toString() + ", quality=" + quality);
             treasureTransmutableList.add(transmutable);

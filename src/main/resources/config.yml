@@ -36,13 +36,63 @@ treasure_transmutables: [
 
 heart_transmutables: [
   {
-    material: IRON_BLOCK,
+    displayName: 'Block of Coal',
+    material: COAL_BLOCK,
+    levelRequired: 1,
+    heartsGained: 1
+  },
+  {
+    displayName: 'Hay Bale',
+    material: HAY_BLOCK,
+    levelRequired: 2,
+    heartsGained: 1
+  },
+  {
+    displayName: 'Block of Copper',
+    material: COPPER_BLOCK,
     levelRequired: 3,
     heartsGained: 1
   },
   {
-    material: EMERALD_BLOCK,
+    displayName: 'Block of Iron',
+    material: IRON_BLOCK,
+    levelRequired: 4,
+    heartsGained: 1
+  },
+  {
+    displayName: 'Block of Gold',
+    material: GOLD_BLOCK,
+    levelRequired: 5,
+    heartsGained: 1
+  },
+  {
+    displayName: 'Block of Lapis Lazuli',
+    material: LAPIS_BLOCK,
+    levelRequired: 6,
+    heartsGained: 1
+  },
+  {
+    displayName: 'Block of Diamond',
+    material: DIAMOND_BLOCK,
+    levelRequired: 6,
+    heartsGained: 1
+  },
+  {
+    displayName: 'Lodestone',
+    material: LODESTONE,
     levelRequired: 7,
+    heartsGained: 1
+  },
+  {
+    displayName: 'Shulker Box',
+    material: SHULKER_BOX,
+    levelRequired: 8,
+    heartsGained: 1
+  },
+  {
+    displayName: 'Beacon',
+    material: BEACON,
+    levelRequired: 9,
     heartsGained: 1
   }
 ]
