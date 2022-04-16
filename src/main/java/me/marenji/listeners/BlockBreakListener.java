@@ -2,6 +2,7 @@ package me.marenji.listeners;
 
 import me.marenji.TransmutePlugin;
 import me.marenji.transmutables.TransmutableManager;
+import me.marenji.util.ChatHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -15,21 +16,35 @@ public class BlockBreakListener implements Listener {
 
     public BlockBreakListener() {
         this.plugin = TransmutePlugin.getInstance();
+        this.transmutableManager = TransmutableManager.getInstance();
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
     public void onBreakBlock(BlockBreakEvent event) {
+        Bukkit.getLogger().info("onBreakBlock");
         var player = event.getPlayer();
 
-        var itemHeld = player.getItemInUse();
-        if (itemHeld == null) return;
+        var itemHeld = player.getInventory().getItemInMainHand();
+        if (itemHeld == null) {
+            Bukkit.getLogger().info("no item held");
+            return;
+        }
 
-        var itemType = itemHeld.getType();
-        if (itemType != Material.GOLDEN_PICKAXE) return;
+        var itemHeldType = itemHeld.getType();
+        if (itemHeldType != Material.GOLDEN_PICKAXE) {
+            Bukkit.getLogger().info("Not golden pickaxe, is" + itemHeldType.toString());
+            player.sendMessage(ChatHelper.chat("Not golden pickaxe, is" + itemHeldType.toString()));
+            return;
+        };
 
-        var transmutable = transmutableManager.getTransmutable(itemType);
-        if (transmutable == null) return;
+        var blockBrokenType = event.getBlock().getType();
+        var transmutable = transmutableManager.getTransmutable(blockBrokenType);
+        if (transmutable == null) {
+            Bukkit.getLogger().info("Not transmutable");
+            player.sendMessage(ChatHelper.chat("Not transmutable"));
+            return;
+        };
 
         transmutable.transmute(event);
     }

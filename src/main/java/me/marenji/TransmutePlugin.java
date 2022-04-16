@@ -3,13 +3,17 @@ package me.marenji;
 import me.marenji.commands.SetMaxHealthAllCommand;
 import me.marenji.commands.SetMaxHealthCommand;
 import me.marenji.listeners.*;
-import me.marenji.transmutables.TransmutableManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class TransmutePlugin extends JavaPlugin {
 
     private static TransmutePlugin single_instance = null;
+
+    public TransmutePlugin() {
+        super();
+        initStaticSingleInstance();
+    }
 
     @Override
     public void onEnable() {
@@ -24,7 +28,6 @@ public final class TransmutePlugin extends JavaPlugin {
         new GoldenFoodListener();
         new RespawnListener();
         new BlockBreakListener();
-        initStaticSingleInstance();
     }
 
     @Override
