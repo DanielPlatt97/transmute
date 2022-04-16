@@ -39,16 +39,11 @@ public final class TransmutableManager {
 
 
     public Transmutable getTransmutable(Material material) {
-        Bukkit.getLogger().info("heart transmutables, " + heartTransmutables.toString());
-        Bukkit.getLogger().info("treasure transmutables, " + treasureTransmutables.toString());
-        Bukkit.getLogger().info("material: material " + treasureTransmutables.toString());
         if (isHeartTransmutable(material)) {
-            Bukkit.getLogger().info("is heart");
             return getHeartTransmutable(material);
         }
 
         if (isTreasureTransmutable(material)) {
-            Bukkit.getLogger().info("is treasure");
             return getTreasureTransmutable(material);
         }
 

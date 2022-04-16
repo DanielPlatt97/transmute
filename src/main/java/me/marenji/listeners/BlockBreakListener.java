@@ -22,27 +22,21 @@ public class BlockBreakListener implements Listener {
 
     @EventHandler
     public void onBreakBlock(BlockBreakEvent event) {
-        Bukkit.getLogger().info("onBreakBlock");
         var player = event.getPlayer();
 
         var itemHeld = player.getInventory().getItemInMainHand();
         if (itemHeld == null) {
-            Bukkit.getLogger().info("no item held");
             return;
         }
 
         var itemHeldType = itemHeld.getType();
         if (itemHeldType != Material.GOLDEN_PICKAXE) {
-            Bukkit.getLogger().info("Not golden pickaxe, is" + itemHeldType.toString());
-            player.sendMessage(ChatHelper.chat("Not golden pickaxe, is" + itemHeldType.toString()));
             return;
         };
 
         var blockBrokenType = event.getBlock().getType();
         var transmutable = transmutableManager.getTransmutable(blockBrokenType);
         if (transmutable == null) {
-            Bukkit.getLogger().info("Not transmutable");
-            player.sendMessage(ChatHelper.chat("Not transmutable"));
             return;
         };
 

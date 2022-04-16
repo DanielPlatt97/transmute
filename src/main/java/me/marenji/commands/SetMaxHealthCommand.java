@@ -62,8 +62,9 @@ public class SetMaxHealthCommand implements CommandExecutor {
         if ( playerString == null) { // no player specified
             if ( sender instanceof Player ) {
                 targetPlayer = (Player)sender;
+                playerString = targetPlayer.getName();
             } else {
-                playerString = "Unknown(probably console)";
+                playerString = "Unknown";
             }
         } else {
             targetPlayer = Bukkit.getPlayerExact(playerString);
