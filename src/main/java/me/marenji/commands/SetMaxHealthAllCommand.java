@@ -11,7 +11,6 @@ import org.bukkit.command.CommandSender;
 
 public class SetMaxHealthAllCommand implements CommandExecutor {
 
-    //@SuppressWarnings({"unused"})
     private TransmutePlugin plugin;
     private PlayerHealthManager healthManager;
 

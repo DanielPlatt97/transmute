@@ -11,7 +11,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class DeathListener implements Listener {
 
-    @SuppressWarnings({"unused"})
     private TransmutePlugin plugin;
     private PlayerHealthManager healthManager;
 

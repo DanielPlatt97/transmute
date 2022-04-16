@@ -13,7 +13,6 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 
 public class GoldenFoodListener implements Listener {
 
-    @SuppressWarnings({ "unused" })
     private TransmutePlugin plugin;
     private PlayerHealthManager healthManager;
 

@@ -13,7 +13,6 @@ import org.bukkit.potion.PotionEffectType;
 
 public class RespawnListener implements Listener {
 
-    @SuppressWarnings({"unused"})
     private TransmutePlugin plugin;
     private PlayerHealthManager healthManager;
 

@@ -22,3 +22,9 @@ maxhealth_penaltyjoined_message: 'Welcome to SudoHSMP! You have 3 minutes of imm
 diamondtribute_success_message: 'Thank you for your tribute mortal. Enjoy your extra heart.'
 emeraldtribute_success_message: 'Thank you for your tribute mortal. Enjoy your diamond.'
 diamondtribute_fail_message: 'Thank you for your tribute mortal, but I am afriad to give you more health than that, you are already too powerful.'
+
+test: [
+        test1: {
+                 test 3: 'helo'
+        }
+]

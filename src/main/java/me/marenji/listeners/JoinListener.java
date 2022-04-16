@@ -11,7 +11,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class JoinListener implements Listener {
 
-    @SuppressWarnings({"unused"})
     private TransmutePlugin plugin;
     private PlayerHealthManager healthManager;
 

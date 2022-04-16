@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 
 public class SetMaxHealthCommand implements CommandExecutor {
 
-    //@SuppressWarnings({"unused"})
     private TransmutePlugin plugin;
     private PlayerHealthManager healthManager;
 
