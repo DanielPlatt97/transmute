@@ -12,16 +12,10 @@ public abstract class Transmutable {
 
     private Material material;
     private String displayName;
-    protected PlayerHealthManager playerHealthManager;
-    protected TransmutableManager transmutableManager;
-    protected PlayerMessageManager messagePlayer;
 
     public Transmutable(Material material, String displayName) {
         this.material = material;
         this.displayName = displayName;
-        this.playerHealthManager = PlayerHealthManager.getInstance();
-        this.transmutableManager = TransmutableManager.getInstance();
-        this.messagePlayer = PlayerMessageManager.getInstance();
     }
 
     public Material getMaterial() {

@@ -12,15 +12,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class JoinListener implements Listener {
 
-    private final TransmutePlugin plugin;
-    private final PlayerHealthManager healthManager;
-    private final PlayerMessageManager messagePlayer;
-
     public JoinListener() {
-        this.plugin = TransmutePlugin.getInstance();
-        this.healthManager = PlayerHealthManager.getInstance();
-        this.messagePlayer = PlayerMessageManager.getInstance();
-        Bukkit.getPluginManager().registerEvents(this, plugin);
+        Bukkit.getPluginManager().registerEvents(
+            this,
+            TransmutePlugin.getInstance()
+        );
     }
 
     @EventHandler
@@ -31,10 +27,12 @@ public class JoinListener implements Listener {
             setupNewPlayer(player);
         }
 
-        messagePlayer.sendNextHeartMessage(player);
+        PlayerMessageManager.getInstance().sendNextHeartMessage(player);
     }
 
     private void setupNewPlayer(Player player) {
+        var healthManager = PlayerHealthManager.getInstance();
+        var plugin = TransmutePlugin.getInstance();
         healthManager.setMaxHearts(player, plugin.getConfig().getInt("startinghearts"));
         healthManager.setPlayerHealthToMaxHealth(player);
         healthManager.applyPenaltyImmunity(player);
@@ -42,7 +40,7 @@ public class JoinListener implements Listener {
                 plugin.getConfig()
                         .getString("maxhealth_penaltyjoined_message")
         ));
-        messagePlayer.sendNextHeartMessage(player);
+        PlayerMessageManager.getInstance().sendNextHeartMessage(player);
     }
 
 }

@@ -1,5 +1,7 @@
 package me.marenji.transmutables;
 
+import me.marenji.player.PlayerHealthManager;
+import me.marenji.player.PlayerMessageManager;
 import me.marenji.util.ChatHelper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
@@ -26,13 +28,16 @@ public class HeartTransmutable extends Transmutable {
 
     public void transmute(BlockBreakEvent event) {
         var player = event.getPlayer();
+
+        var playerHealthManager = PlayerHealthManager.getInstance();
+
         if (playerHealthManager.getMaxHearts(player) != levelRequired) return;
 
         event.setDropItems(false);
 
         lightningStrikeBlock(event.getBlock());
         playerHealthManager.addHearts(player, heartsGained);
-        messagePlayer.sendNextHeartMessage(player);
+        PlayerMessageManager.getInstance().sendNextHeartMessage(player);
     }
 
 }

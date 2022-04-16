@@ -1,6 +1,7 @@
 package me.marenji.transmutables;
 
 import me.marenji.util.ConfigHelper;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public final class TransmutableManager {
     private void initHashMaps(Iterable<HeartTransmutable> heartTransmutables, Iterable<TreasureTransmutable> treasureTransmutables) {
         this.heartTransmutablesByMaterial = new HashMap<>();
         this.treasureTransmutablesByMaterial = new HashMap<>();
+        this.heartTransmutablesByLevel = new HashMap<>();
         for (var heartTransmutable: heartTransmutables) {
             this.heartTransmutablesByMaterial.put(heartTransmutable.getMaterial(), heartTransmutable);
             this.heartTransmutablesByLevel.put(heartTransmutable.getLevelRequired(), heartTransmutable);

@@ -2,6 +2,7 @@ package me.marenji.listeners;
 
 import me.marenji.TransmutePlugin;
 import me.marenji.player.PlayerHealthManager;
+import me.marenji.player.PlayerMessageManager;
 import me.marenji.tribute.DiamondTribute;
 import me.marenji.tribute.EmeraldTribute;
 import me.marenji.tribute.TributeFactory;
@@ -13,13 +14,11 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 
 public class GoldenFoodListener implements Listener {
 
-    private TransmutePlugin plugin;
-    private PlayerHealthManager healthManager;
-
     public GoldenFoodListener() {
-        this.plugin = TransmutePlugin.getInstance();
-        this.healthManager = PlayerHealthManager.getInstance();
-        Bukkit.getPluginManager().registerEvents(this, plugin);
+        Bukkit.getPluginManager().registerEvents(
+            this,
+            TransmutePlugin.getInstance()
+        );
     }
 
     @EventHandler
@@ -27,6 +26,8 @@ public class GoldenFoodListener implements Listener {
         var itemStack = event.getItem();
         var foodType = itemStack.getType();
         var player = event.getPlayer();
+        var healthManager = PlayerHealthManager.getInstance();
+        var plugin = TransmutePlugin.getInstance();
         var tribute = TributeFactory.getTribute(player, foodType, healthManager);
         if (tribute == null) {
             return;

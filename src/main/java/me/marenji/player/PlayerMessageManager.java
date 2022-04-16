@@ -14,12 +14,8 @@ import org.bukkit.potion.PotionEffectType;
 public final class PlayerMessageManager {
 
     private static PlayerMessageManager single_instance = null;
-    private PlayerHealthManager healthManager;
-    private TransmutableManager transmutableManager;
 
     public PlayerMessageManager() {
-        this.healthManager = PlayerHealthManager.getInstance();
-        this.transmutableManager = TransmutableManager.getInstance();
     }
 
     public static PlayerMessageManager getInstance()
@@ -31,8 +27,8 @@ public final class PlayerMessageManager {
     }
 
     public void sendNextHeartMessage(Player player) {
-        var currentHearts = healthManager.getMaxHearts(player);
-        var message = transmutableManager.getNextHeartTransmutableMessage(currentHearts);
+        var currentHearts = PlayerHealthManager.getInstance().getMaxHearts(player);
+        var message = TransmutableManager.getInstance().getNextHeartTransmutableMessage(currentHearts);
         message(player, message);
     }
 

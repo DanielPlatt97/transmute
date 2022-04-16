@@ -13,18 +13,18 @@ import org.bukkit.potion.PotionEffectType;
 
 public class RespawnListener implements Listener {
 
-    private TransmutePlugin plugin;
-    private PlayerHealthManager healthManager;
-
     public RespawnListener() {
-        this.plugin = TransmutePlugin.getInstance();
-        this.healthManager = PlayerHealthManager.getInstance();
-        Bukkit.getPluginManager().registerEvents(this, plugin);
+        Bukkit.getPluginManager().registerEvents(
+            this,
+            TransmutePlugin.getInstance()
+        );
     }
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
+        var healthManager = PlayerHealthManager.getInstance();
+        var plugin = TransmutePlugin.getInstance();
 
         // apply the status effect 3 ticks after respawn since the player will not be alive yet
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {

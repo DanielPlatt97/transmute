@@ -12,20 +12,19 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class DeathListener implements Listener {
 
-    private TransmutePlugin plugin;
-    private PlayerHealthManager healthManager;
-    private PlayerMessageManager messagePlayer;
-
     public DeathListener() {
-        this.plugin = TransmutePlugin.getInstance();
-        this.healthManager = PlayerHealthManager.getInstance();
-        this.messagePlayer = PlayerMessageManager.getInstance();
-        Bukkit.getPluginManager().registerEvents(this, plugin);
+        Bukkit.getPluginManager().registerEvents(
+            this,
+            TransmutePlugin.getInstance()
+        );
     }
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
+        var healthManager = PlayerHealthManager.getInstance();
+        var messagePlayer = PlayerMessageManager.getInstance();
+        var plugin = TransmutePlugin.getInstance();
         if ( healthManager.isPlayerImmuneToPenalty(player) ) {
             player.sendMessage(ChatHelper.chat(
                     plugin.getConfig()
