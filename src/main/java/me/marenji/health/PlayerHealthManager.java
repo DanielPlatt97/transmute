@@ -1,6 +1,6 @@
 package me.marenji.health;
 
-import me.marenji.TransmutePlugin;
+import me.marenji.util.ConfigHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -8,19 +8,28 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class PlayerHealthManager {
+public final class PlayerHealthManager {
 
-    private int minHearts;
-    private int maxHearts;
-    private int defaultHeartChange;
-    private int heartLossPenaltyCooldown;
+    private static PlayerHealthManager single_instance = null;
 
-    public PlayerHealthManager(TransmutePlugin plugin) {
-        var config = plugin.getConfig();
-        minHearts = config.getInt("minhearts");
-        maxHearts = config.getInt("maxhearts");
-        defaultHeartChange = config.getInt("defaultheartchange");
-        heartLossPenaltyCooldown = config.getInt("heartpenaltycooldown");
+    private final int minHearts;
+    private final int maxHearts;
+    private final int defaultHeartChange;
+    private final int heartLossPenaltyCooldown;
+
+    public PlayerHealthManager() {
+        minHearts = ConfigHelper.getMinHearts();
+        maxHearts = ConfigHelper.getMaxHearts();
+        defaultHeartChange = ConfigHelper.getDefaultHeartChange();
+        heartLossPenaltyCooldown = ConfigHelper.getHeartPenaltyCooldown();
+    }
+
+    public static PlayerHealthManager getInstance()
+    {
+        if (single_instance == null) {
+            single_instance = new PlayerHealthManager();
+        }
+        return single_instance;
     }
 
     public boolean setMaxHeartsAllPlayers(int hearts) {

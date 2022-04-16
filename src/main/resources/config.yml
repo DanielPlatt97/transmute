@@ -23,8 +23,26 @@ diamondtribute_success_message: 'Thank you for your tribute mortal. Enjoy your e
 emeraldtribute_success_message: 'Thank you for your tribute mortal. Enjoy your diamond.'
 diamondtribute_fail_message: 'Thank you for your tribute mortal, but I am afriad to give you more health than that, you are already too powerful.'
 
-test: [
-        test1: {
-                 test 3: 'helo'
-        }
+treasure_transmutables: [
+  {
+    material: COPPER_BLOCK,
+    quality: 5
+  },
+  {
+    material: GOLD_BLOCK,
+    quality: 4
+  }
+]
+
+heart_transmutables: [
+  {
+    material: IRON_BLOCK,
+    levelRequired: 3,
+    heartsGained: 1
+  },
+  {
+    material: EMERALD_BLOCK,
+    levelRequired: 7,
+    heartsGained: 1
+  }
 ]

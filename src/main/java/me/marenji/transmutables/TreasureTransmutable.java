@@ -2,6 +2,7 @@ package me.marenji.transmutables;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
+import org.bukkit.event.block.BlockBreakEvent;
 
 public class TreasureTransmutable extends Transmutable{
 
@@ -13,7 +14,11 @@ public class TreasureTransmutable extends Transmutable{
         this.quality = quality;
     }
 
-    public void transmute() {
+    public int getQuality() {
+        return quality;
+    }
+
+    public void transmute(BlockBreakEvent event) {
         throw new NotImplementedException();
     }
 

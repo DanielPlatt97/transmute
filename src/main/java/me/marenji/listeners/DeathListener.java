@@ -14,9 +14,9 @@ public class DeathListener implements Listener {
     private TransmutePlugin plugin;
     private PlayerHealthManager healthManager;
 
-    public DeathListener(TransmutePlugin plugin) {
-        this.plugin = plugin;
-        this.healthManager = new PlayerHealthManager(plugin);
+    public DeathListener() {
+        this.plugin = TransmutePlugin.getInstance();
+        this.healthManager = PlayerHealthManager.getInstance();
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 

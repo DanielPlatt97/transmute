@@ -16,9 +16,9 @@ public class GoldenFoodListener implements Listener {
     private TransmutePlugin plugin;
     private PlayerHealthManager healthManager;
 
-    public GoldenFoodListener(TransmutePlugin plugin) {
-        this.plugin = plugin;
-        this.healthManager = new PlayerHealthManager(plugin);
+    public GoldenFoodListener() {
+        this.plugin = TransmutePlugin.getInstance();
+        this.healthManager = PlayerHealthManager.getInstance();
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 

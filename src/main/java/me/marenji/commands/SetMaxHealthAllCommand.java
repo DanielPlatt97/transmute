@@ -14,9 +14,9 @@ public class SetMaxHealthAllCommand implements CommandExecutor {
     private TransmutePlugin plugin;
     private PlayerHealthManager healthManager;
 
-    public SetMaxHealthAllCommand(TransmutePlugin plugin) {
-        this.plugin = plugin;
-        this.healthManager = new PlayerHealthManager(plugin);
+    public SetMaxHealthAllCommand() {
+        this.plugin = TransmutePlugin.getInstance();
+        this.healthManager = PlayerHealthManager.getInstance();
         plugin.getCommand("maxhealthall").setExecutor(this);
     }
 

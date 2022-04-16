@@ -14,9 +14,9 @@ public class JoinListener implements Listener {
     private TransmutePlugin plugin;
     private PlayerHealthManager healthManager;
 
-    public JoinListener(TransmutePlugin plugin) {
-        this.plugin = plugin;
-        this.healthManager = new PlayerHealthManager(plugin);
+    public JoinListener() {
+        this.plugin = TransmutePlugin.getInstance();
+        this.healthManager = PlayerHealthManager.getInstance();
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 

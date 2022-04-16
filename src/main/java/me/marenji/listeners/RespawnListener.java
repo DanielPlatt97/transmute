@@ -16,9 +16,9 @@ public class RespawnListener implements Listener {
     private TransmutePlugin plugin;
     private PlayerHealthManager healthManager;
 
-    public RespawnListener(TransmutePlugin plugin) {
-        this.plugin = plugin;
-        this.healthManager = new PlayerHealthManager(plugin);
+    public RespawnListener() {
+        this.plugin = TransmutePlugin.getInstance();
+        this.healthManager = PlayerHealthManager.getInstance();
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 

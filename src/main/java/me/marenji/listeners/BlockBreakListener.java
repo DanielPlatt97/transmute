@@ -1,23 +1,20 @@
 package me.marenji.listeners;
 
 import me.marenji.TransmutePlugin;
-import me.marenji.health.PlayerHealthManager;
-import me.marenji.util.ChatHelper;
+import me.marenji.transmutables.TransmutableManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class BlockBreakListener implements Listener {
 
     private TransmutePlugin plugin;
-    private PlayerHealthManager healthManager;
+    private TransmutableManager transmutableManager;
 
-    public BlockBreakListener(TransmutePlugin plugin) {
-        this.plugin = plugin;
+    public BlockBreakListener() {
+        this.plugin = TransmutePlugin.getInstance();
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
@@ -31,7 +28,10 @@ public class BlockBreakListener implements Listener {
         var itemType = itemHeld.getType();
         if (itemType != Material.GOLDEN_PICKAXE) return;
 
+        var transmutable = transmutableManager.getTransmutable(itemType);
+        if (transmutable == null) return;
 
+        transmutable.transmute(event);
     }
 
 }
