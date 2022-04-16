@@ -18,7 +18,7 @@ public class TreasureTransmutable extends Transmutable{
         return quality;
     }
 
-    public void transmute(BlockBreakEvent event) {
+    public boolean transmute(BlockBreakEvent event) {
         throw new NotImplementedException();
     }
 

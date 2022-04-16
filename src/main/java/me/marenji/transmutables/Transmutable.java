@@ -26,7 +26,19 @@ public abstract class Transmutable {
         return displayName;
     }
 
-    public abstract void transmute(BlockBreakEvent event);
+    public abstract boolean transmute(BlockBreakEvent event);
+
+    protected boolean canTransmute(BlockBreakEvent event) {
+        var player = event.getPlayer();
+
+        var itemHeld = player.getInventory().getItemInMainHand();
+        if (itemHeld == null) return false;
+
+        var itemHeldType = itemHeld.getType();
+        if (itemHeldType != Material.GOLDEN_PICKAXE) return false;
+
+        return true;
+    }
 
     protected void lightningStrikePlayer(Player player) {
         var location = player.getLocation();

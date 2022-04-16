@@ -19,18 +19,9 @@ public class BlockBreakListener implements Listener {
 
     @EventHandler
     public void onBreakBlock(BlockBreakEvent event) {
-        var player = event.getPlayer();
-
-        var itemHeld = player.getInventory().getItemInMainHand();
-        if (itemHeld == null) return;
-
-        var itemHeldType = itemHeld.getType();
-        if (itemHeldType != Material.GOLDEN_PICKAXE) return;
-
         var blockBrokenType = event.getBlock().getType();
         var transmutable = TransmutableManager.getInstance().getTransmutable(blockBrokenType);
         if (transmutable == null) return;
-
         transmutable.transmute(event);
     }
 

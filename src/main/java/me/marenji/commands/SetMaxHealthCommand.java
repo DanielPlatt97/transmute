@@ -2,6 +2,7 @@ package me.marenji.commands;
 
 import me.marenji.TransmutePlugin;
 import me.marenji.player.PlayerHealthManager;
+import me.marenji.player.PlayerMessageManager;
 import me.marenji.util.ChatHelper;
 import me.marenji.util.PermissionsHelper;
 import org.bukkit.Bukkit;
@@ -89,6 +90,7 @@ public class SetMaxHealthCommand implements CommandExecutor {
                     plugin.getConfig()
                             .getString("maxhealth_healthset_message")
             ));
+            PlayerMessageManager.getInstance().sendNextHeartMessage(targetPlayer);
             return true;
         } else {
             sender.sendMessage(ChatHelper.chat(

@@ -69,6 +69,10 @@ public final class ConfigHelper {
         return getInt("heartpenaltycooldown");
     }
 
+    public static int getTransmuteItemDamage() {
+        return getInt("transmuteitemdamage");
+    }
+
     private static int getInt(String key) {
         var integerValue = TransmutePlugin
                 .getInstance()

@@ -33,10 +33,14 @@ public final class TransmutableManager {
         this.heartTransmutablesByMaterial = new HashMap<>();
         this.treasureTransmutablesByMaterial = new HashMap<>();
         this.heartTransmutablesByLevel = new HashMap<>();
+
         for (var heartTransmutable: heartTransmutables) {
             this.heartTransmutablesByMaterial.put(heartTransmutable.getMaterial(), heartTransmutable);
-            this.heartTransmutablesByLevel.put(heartTransmutable.getLevelRequired(), heartTransmutable);
+            if (!this.heartTransmutablesByLevel.containsKey(heartTransmutable.getLevelRequired())) {
+                this.heartTransmutablesByLevel.put(heartTransmutable.getLevelRequired(), heartTransmutable);
+            }
         }
+
         for (var treasureTransmutable: treasureTransmutables) {
             this.treasureTransmutablesByMaterial.put(treasureTransmutable.getMaterial(), treasureTransmutable);
         }
@@ -58,7 +62,6 @@ public final class TransmutableManager {
         if (levelHasHeartTransmutable(level)) {
             return getHeartTransmutable(level);
         }
-
         return null;
     }
 
