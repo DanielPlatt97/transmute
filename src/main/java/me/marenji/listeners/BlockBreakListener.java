@@ -22,20 +22,30 @@ public class BlockBreakListener implements Listener {
     @EventHandler
     public void onBreakBlock(BlockBreakEvent event) {
         var blockBrokenType = event.getBlock().getType();
-        handleDiamondBreaking(event);
+        handleRareOreLogging(event);
         var transmutable = TransmutableManager.getInstance().getTransmutable(blockBrokenType);
         if (transmutable == null) return;
         transmutable.transmute(event);
     }
 
-    private void handleDiamondBreaking(BlockBreakEvent event) {
+    private void handleRareOreLogging(BlockBreakEvent event) {
         var blockBrokenType = event.getBlock().getType();
-        if (blockBrokenType != Material.DIAMOND_ORE) return;
+        ChatColor colour;
+        String oreName;
+        if (blockBrokenType == Material.DIAMOND_ORE) {
+            colour = ChatColor.BLUE;
+            oreName = "diamond ore";
+        } else if (blockBrokenType == Material.ANCIENT_DEBRIS) {
+            colour = ChatColor.DARK_RED;
+            oreName = "acient debris";
+        } else {
+            return;
+        }
 
         var itemHeld = event.getPlayer().getInventory().getItemInMainHand();
         if (itemHeld == null) return;
 
-        var message = ChatColor.BLUE + event.getPlayer().getName() + " mined diamond ore";
+        var message = colour + event.getPlayer().getName() + " mined " + oreName;
 
         var hasSilkTouch = itemHeld.containsEnchantment(Enchantment.SILK_TOUCH);
         if (hasSilkTouch) {
