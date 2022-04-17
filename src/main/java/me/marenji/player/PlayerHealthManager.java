@@ -115,7 +115,7 @@ public final class PlayerHealthManager {
         var effectList = playerEffectsPreDeath.get(playerId);
         effectList.clear();
         for (PotionEffect effect : player.getActivePotionEffects()) {
-            if (effect.getType() != PotionEffectType.UNLUCK) continue;
+            if (effect.getType().getName() != PotionEffectType.UNLUCK.getName()) continue;
             effectList.add(effect);
         }
     }
@@ -126,8 +126,8 @@ public final class PlayerHealthManager {
             return null;
         }
         var effectList = playerEffectsPreDeath.get(playerId);
-        for (PotionEffect effect : player.getActivePotionEffects()) {
-            if (effect.getType() != PotionEffectType.UNLUCK) continue;
+        for (PotionEffect effect : effectList) {
+            if (effect.getType().getName() != PotionEffectType.UNLUCK.getName()) continue;
             return effect;
         }
         return null;
@@ -141,7 +141,6 @@ public final class PlayerHealthManager {
     public void applyPenaltyImmunity(Player player) {
         var toPlayer = new PlayerMessageManager(player);
         var duration = heartLossPenaltyCooldown * 60 * 20;
-
         var preExistingBadLuckEffect = getPreDeathBadLuckStatusEffect(player);
         if (preExistingBadLuckEffect != null) {
             duration = preExistingBadLuckEffect.getDuration();
