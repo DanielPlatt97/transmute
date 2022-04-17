@@ -3,7 +3,6 @@ package me.marenji.listeners;
 import me.marenji.TransmutePlugin;
 import me.marenji.transmutables.TransmutableManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;

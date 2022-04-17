@@ -25,7 +25,6 @@ public final class TransmutePlugin extends JavaPlugin {
         new SetMaxHealthAllCommand();
         new JoinListener();
         new DeathListener();
-        new GoldenFoodListener();
         new RespawnListener();
         new BlockBreakListener();
     }

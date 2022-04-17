@@ -1,7 +1,6 @@
 package me.marenji.transmutables;
 
 import me.marenji.util.ConfigHelper;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 
 import java.util.HashMap;
