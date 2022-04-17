@@ -2,8 +2,8 @@ package me.marenji.util;
 
 import me.marenji.TransmutePlugin;
 import me.marenji.transmutables.HeartTransmutable;
+import me.marenji.transmutables.TreasureManager;
 import me.marenji.transmutables.TreasureTransmutable;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
@@ -27,7 +27,6 @@ public final class ConfigHelper {
                 levelRequired,
                 heartsGained
             );
-            Bukkit.getLogger().info("transmutable: material=" + material.toString() + ", levelRequired=" + levelRequired + ", heartsGained=" + heartsGained);
             heartTransmutableList.add(transmutable);
         }
 
@@ -35,21 +34,17 @@ public final class ConfigHelper {
     }
 
     public static Iterable<TreasureTransmutable> getTreasureTransmutables() {
-        var mapList = getMapListFromConfig("treasure_transmutables");
+        var treasureMap = TreasureManager.getInstance().getTreasuresByMaterial();
+        var setOfMaterials = treasureMap.keySet();
         var treasureTransmutableList = new ArrayList<TreasureTransmutable>();
-        for (var map: mapList) {
-            var material = Material.valueOf((String)map.get("material"));
-            var quality = (int)map.get("quality");
-            var displayName = (String)map.get("displayName");
+        for (var material: setOfMaterials) {
+            var displayName = material.name();
             var transmutable = new TreasureTransmutable(
                 material,
-                displayName,
-                quality
+                displayName
             );
-            Bukkit.getLogger().info("transmutable: material=" + material.toString() + ", quality=" + quality);
             treasureTransmutableList.add(transmutable);
         }
-
         return treasureTransmutableList;
     }
 

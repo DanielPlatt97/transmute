@@ -7,8 +7,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 public abstract class Transmutable {
 
-    private Material material;
-    private String displayName;
+    protected Material material;
+    protected String displayName;
 
     public Transmutable(Material material, String displayName) {
         this.material = material;

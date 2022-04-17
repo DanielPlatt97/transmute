@@ -23,6 +23,7 @@ public class BlockBreakListener implements Listener {
     public void onBreakBlock(BlockBreakEvent event) {
         var blockBrokenType = event.getBlock().getType();
         handleRareOreLogging(event);
+
         var transmutable = TransmutableManager.getInstance().getTransmutable(blockBrokenType);
         if (transmutable == null) return;
         transmutable.transmute(event);

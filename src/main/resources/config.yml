@@ -12,17 +12,6 @@ maxhealth_invalidargs_message: 'Invalid command arguments. The command should lo
 maxhealthall_invalidargs_message: 'Invalid command arguments. The command should look like: maxhealthall <number_of_hearts>'
 maxhealth_invalidhearts_message: 'You cannot set a player to have that amount of hearts'
 
-treasure_transmutables: [
-  {
-    material: COPPER_BLOCK,
-    quality: 5
-  },
-  {
-    material: GOLD_BLOCK,
-    quality: 4
-  }
-]
-
 heart_transmutables: [
   {
     displayName: 'Block of Coal',

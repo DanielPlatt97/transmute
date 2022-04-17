@@ -6,20 +6,23 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 public class TreasureTransmutable extends Transmutable{
 
-    // higher quality increases the probability of getting a better treasure
-    private int quality;
 
-    public TreasureTransmutable(Material material, String displayName, int quality) {
+
+    public TreasureTransmutable(Material material, String displayName) {
         super(material, displayName);
-        this.quality = quality;
-    }
-
-    public int getQuality() {
-        return quality;
     }
 
     public boolean transmute(BlockBreakEvent event) {
-        throw new NotImplementedException();
+        if (!canTransmute(event)) return false;
+
+        var treasureManager = TreasureManager.getInstance();
+        var droppedItem = treasureManager.getRandomItemStackForMaterial(this.material);
+
+        var block = event.getBlock();
+        var location = block.getLocation();
+        var world = block.getWorld();
+        world.dropItem(location, droppedItem);
+        return true;
     }
 
 }
