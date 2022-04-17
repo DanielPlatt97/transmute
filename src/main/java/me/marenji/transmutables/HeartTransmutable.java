@@ -2,6 +2,7 @@ package me.marenji.transmutables;
 
 import me.marenji.player.PlayerHealthManager;
 import me.marenji.player.PlayerMessageManager;
+import me.marenji.player.PlayerScoreboardManager;
 import me.marenji.util.ConfigHelper;
 import org.bukkit.Material;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -40,6 +41,7 @@ public class HeartTransmutable extends Transmutable {
         if (!canTransmute(event)) return false;
 
         var player = event.getPlayer();
+        var toPlayer = new PlayerMessageManager(player);
         var playerHealthManager = PlayerHealthManager.getInstance();
         var itemHeld = player.getInventory().getItemInMainHand();
 
@@ -49,16 +51,23 @@ public class HeartTransmutable extends Transmutable {
 
         ItemMeta itemHeldMeta = itemHeld.getItemMeta();
         if (itemHeldMeta instanceof Damageable){
-            //Bukkit.getLogger().info("Damageable");
             Damageable damagable = (Damageable) itemHeldMeta;
             int currentDamage = damagable.getDamage();
             damagable.setDamage(currentDamage + ConfigHelper.getTransmuteItemDamage());
             itemHeld.setItemMeta(damagable);
-            //player.updateInventory();
         }
 
         playerHealthManager.addHearts(player, heartsGained);
-        new PlayerMessageManager(player).sendNextHeartMessage();
+        toPlayer.sendNextHeartMessage();
+
+        var playerScoreboard = new PlayerScoreboardManager(player);
+        var newMaxHearts = playerHealthManager.getMaxHearts(player);
+        var hitNetherLevel = newMaxHearts == ConfigHelper.getNetherLevelRequired();
+        var unlockedNether = playerScoreboard.getCanEnterNether();
+        if (hitNetherLevel && !unlockedNether) {
+            playerScoreboard.setCanEnterNether();
+            toPlayer.message("You can now enter the nether!");
+        }
 
         return true;
     }

@@ -27,6 +27,7 @@ public final class TransmutePlugin extends JavaPlugin {
         new DeathListener();
         new RespawnListener();
         new BlockBreakListener();
+        new NetherPortalListener();
     }
 
     @Override

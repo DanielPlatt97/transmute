@@ -73,6 +73,10 @@ public final class ConfigHelper {
         return getInt("transmuteitemdamage");
     }
 
+    public static int getNetherLevelRequired() {
+        return getInt("netherlevelrequired");
+    }
+
     public static String getTextNotAdmin() {
         return getString("notadmin_message");
     }

@@ -4,6 +4,7 @@ startinghearts: 5
 defaultheartchange: 1
 heartpenaltycooldown: 3
 transmuteitemdamage: 15
+netherlevelrequired: 7
 
 notadmin_message: 'Only admins can use this command.'
 player_joined_message: 'Welcome! You have 3 minutes of immunity but once the time is up you will lose a heart when you die. When the "Bad Luck" status effect is gone you will lose hearts upon death again.'
