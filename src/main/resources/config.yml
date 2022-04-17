@@ -1,6 +1,6 @@
 minhearts: 1
 maxhearts: 15
-startinghearts: 5
+startinghearts: 4
 defaultheartchange: 1
 heartpenaltycooldown: 3
 transmuteitemdamage: 15
@@ -50,14 +50,14 @@ heart_transmutables: [
     heartsGained: 1
   },
   {
-    displayName: 'Block of Gold',
-    material: GOLD_BLOCK,
+    displayName: 'Block of Lapis Lazuli',
+    material: LAPIS_BLOCK,
     levelRequired: 4,
     heartsGained: 1
   },
   {
-    displayName: 'Block of Lapis Lazuli',
-    material: LAPIS_BLOCK,
+    displayName: 'Block of Gold',
+    material: GOLD_BLOCK,
     levelRequired: 5,
     heartsGained: 1
   },
