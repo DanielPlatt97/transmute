@@ -1,5 +1,6 @@
 package me.marenji.player;
 
+import me.marenji.TransmutePlugin;
 import me.marenji.util.ConfigHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
@@ -7,6 +8,10 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public final class PlayerHealthManager {
 
@@ -16,6 +21,8 @@ public final class PlayerHealthManager {
     private final int maxHearts;
     private final int defaultHeartChange;
     private final int heartLossPenaltyCooldown;
+
+    private HashMap<String, List<PotionEffect>> playerEffectsPreDeath = new HashMap<>();
 
     public PlayerHealthManager() {
         minHearts = ConfigHelper.getMinHearts();
@@ -85,9 +92,69 @@ public final class PlayerHealthManager {
         return healthToHearts(getMaxHealth(player));
     }
 
+    public void handleDeath(Player player) {
+        var toPlayer = new PlayerMessageManager(player);
+        rememberPersistingPotionEffects(player);
+
+        if (isPlayerImmuneToPenalty(player)) {
+            toPlayer.message("You have died. Your max health penalty is on cooldown, so you have not lost a heart");
+            return;
+        }
+        if (applyDefaultHeartLoss(player)) {
+            toPlayer.message("You have died. You have returned, but you have one less heart");
+            return;
+        }
+        toPlayer.message("You have died. You have no hearts left, so you have not lost a heart");
+    }
+
+    private void rememberPersistingPotionEffects(Player player) {
+        var playerId = player.getUniqueId().toString();
+        if (!playerEffectsPreDeath.containsKey(playerId)) {
+            playerEffectsPreDeath.put(playerId, new ArrayList<>());
+        }
+        var effectList = playerEffectsPreDeath.get(playerId);
+        effectList.clear();
+        for (PotionEffect effect : player.getActivePotionEffects()) {
+            if (effect.getType() != PotionEffectType.UNLUCK) continue;
+            effectList.add(effect);
+        }
+    }
+
+    private PotionEffect getPreDeathBadLuckStatusEffect(Player player) {
+        var playerId = player.getUniqueId().toString();
+        if (!playerEffectsPreDeath.containsKey(playerId)) {
+            return null;
+        }
+        var effectList = playerEffectsPreDeath.get(playerId);
+        for (PotionEffect effect : player.getActivePotionEffects()) {
+            if (effect.getType() != PotionEffectType.UNLUCK) continue;
+            return effect;
+        }
+        return null;
+    }
+
+    public void handleRespawn(Player player) {
+        applyPenaltyImmunity(player);
+        applyDamageImmunity(player);
+    }
+
     public void applyPenaltyImmunity(Player player) {
+        var toPlayer = new PlayerMessageManager(player);
+        var duration = heartLossPenaltyCooldown * 60 * 20;
+
+        var preExistingBadLuckEffect = getPreDeathBadLuckStatusEffect(player);
+        if (preExistingBadLuckEffect != null) {
+            duration = preExistingBadLuckEffect.getDuration();
+            toPlayer.message("The heart loss penalty cooldown has not reset after death");
+        } else {
+            toPlayer.message("Heart loss penalty cooldown has been applied for 3 minutes");
+        }
+        player.addPotionEffect(new PotionEffect(PotionEffectType.UNLUCK, duration, 0));
+    }
+
+    public void applyDamageImmunity(Player player) {
         player.addPotionEffect(new PotionEffect(
-                PotionEffectType.UNLUCK, heartLossPenaltyCooldown * 60 * 20, 0
+                PotionEffectType.DAMAGE_RESISTANCE, 5 * 20, 4
         ));
     }
 

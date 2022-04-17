@@ -20,19 +20,7 @@ public class DeathListener implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
         var player = event.getEntity();
-        var healthManager = PlayerHealthManager.getInstance();
-        var plugin = TransmutePlugin.getInstance();
-        var toPlayer = new PlayerMessageManager(player);
-
-        if ( healthManager.isPlayerImmuneToPenalty(player) ) {
-            toPlayer.message("You have died. Your max health penalty is on cooldown, so you have not lost a heart");
-        } else {
-            if ( healthManager.applyDefaultHeartLoss(player) ) {
-                toPlayer.message("You have died. You have returned, but you have one less heart");
-            } else {
-                toPlayer.message("You have died. You have no hearts left, so you have not lost a heart");
-            }
-        }
+        PlayerHealthManager.getInstance().handleDeath(player);
         new PlayerMessageManager(player).sendNextHeartMessage();
     }
 

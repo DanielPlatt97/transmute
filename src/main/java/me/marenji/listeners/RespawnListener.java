@@ -30,14 +30,9 @@ public class RespawnListener implements Listener {
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
             @Override
             public void run() {
-                healthManager.applyPenaltyImmunity(player);
-                player.addPotionEffect(new PotionEffect(
-                        PotionEffectType.DAMAGE_RESISTANCE, 5 * 20, 4
-                ));
+                healthManager.handleRespawn(player);
             }
         }, 3L);
-
-        new PlayerMessageManager(player).message("Heart loss penalty cooldown has been applied for 3 minutes");
     }
 
 }
