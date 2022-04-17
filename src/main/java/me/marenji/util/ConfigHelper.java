@@ -73,6 +73,34 @@ public final class ConfigHelper {
         return getInt("transmuteitemdamage");
     }
 
+    public static String getTextNotAdmin() {
+        return getString("notadmin_message");
+    }
+
+    public static String getTextMaxHealthInvalidArgs() {
+        return getString("maxhealth_invalidargs_message");
+    }
+
+    public static String getTextMaxHealthAllInvalidArgs() {
+        return getString("maxhealthall_invalidargs_message");
+    }
+
+    public static String getTextMaxHealthInvalidHearts() {
+        return getString("maxhealth_invalidhearts_message");
+    }
+
+    public static String getTextPlayerJoined() {
+        return getString("player_joined_message");
+    }
+
+    private static String getString(String key) {
+        var stringValue = TransmutePlugin
+                .getInstance()
+                .getConfig()
+                .getString(key);
+        return stringValue;
+    }
+
     private static int getInt(String key) {
         var integerValue = TransmutePlugin
                 .getInstance()

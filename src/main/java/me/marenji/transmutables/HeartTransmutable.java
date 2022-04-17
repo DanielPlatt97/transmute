@@ -61,7 +61,7 @@ public class HeartTransmutable extends Transmutable {
         }
 
         playerHealthManager.addHearts(player, heartsGained);
-        PlayerMessageManager.getInstance().sendNextHeartMessage(player);
+        new PlayerMessageManager(player).sendNextHeartMessage();
 
         return true;
     }

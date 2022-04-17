@@ -4,6 +4,7 @@ import me.marenji.TransmutePlugin;
 import me.marenji.player.PlayerHealthManager;
 import me.marenji.player.PlayerMessageManager;
 import me.marenji.util.ChatHelper;
+import me.marenji.util.ConfigHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,7 +28,7 @@ public class JoinListener implements Listener {
             setupNewPlayer(player);
         }
 
-        PlayerMessageManager.getInstance().sendNextHeartMessage(player);
+        new PlayerMessageManager(player).sendNextHeartMessage();
     }
 
     private void setupNewPlayer(Player player) {
@@ -36,11 +37,9 @@ public class JoinListener implements Listener {
         healthManager.setMaxHearts(player, plugin.getConfig().getInt("startinghearts"));
         healthManager.setPlayerHealthToMaxHealth(player);
         healthManager.applyPenaltyImmunity(player);
-        player.sendMessage(ChatHelper.chat(
-                plugin.getConfig()
-                        .getString("maxhealth_penaltyjoined_message")
-        ));
-        PlayerMessageManager.getInstance().sendNextHeartMessage(player);
+        var toPlayer = new PlayerMessageManager(player);
+        toPlayer.message(ConfigHelper.getTextPlayerJoined());
+        toPlayer.sendNextHeartMessage();
     }
 
 }

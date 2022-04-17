@@ -2,6 +2,7 @@ package me.marenji.listeners;
 
 import me.marenji.TransmutePlugin;
 import me.marenji.player.PlayerHealthManager;
+import me.marenji.player.PlayerMessageManager;
 import me.marenji.util.ChatHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -37,10 +38,7 @@ public class RespawnListener implements Listener {
             }
         }, 3L);
 
-        player.sendMessage(ChatHelper.chat(
-                plugin.getConfig()
-                        .getString("maxhealth_penaltyrespawn_message")
-        ));
+        new PlayerMessageManager(player).message("Heart loss penalty cooldown has been applied for 3 minutes");
     }
 
 }

@@ -4,6 +4,7 @@ import me.marenji.TransmutePlugin;
 import me.marenji.player.PlayerHealthManager;
 import me.marenji.player.PlayerMessageManager;
 import me.marenji.util.ChatHelper;
+import me.marenji.util.ConfigHelper;
 import me.marenji.util.PermissionsHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -24,10 +25,10 @@ public class SetMaxHealthCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        var toSender = new PlayerMessageManager(sender);
+
         if ( !PermissionsHelper.isSenderAdmin(sender) ) {
-            sender.sendMessage(ChatHelper.chat(
-                    plugin.getConfig().getString("notadmin_message")
-            ));
+            toSender.message(ConfigHelper.getTextNotAdmin());
             return false;
         }
 
@@ -43,9 +44,7 @@ public class SetMaxHealthCommand implements CommandExecutor {
 
         // no arguments specified
         if ( heartsString == null ) {
-            sender.sendMessage(ChatHelper.chat(
-                    plugin.getConfig().getString("maxhealth_invalidargs_message")
-            ));
+            toSender.message(ConfigHelper.getTextMaxHealthInvalidArgs());
             return false;
         }
 
@@ -53,9 +52,7 @@ public class SetMaxHealthCommand implements CommandExecutor {
         try {
             hearts = Integer.parseInt(heartsString);
         } catch (Exception e) {
-            sender.sendMessage(ChatHelper.chat(
-                    plugin.getConfig().getString("maxhealth_invalidargs_message")
-            ));
+            toSender.message(ConfigHelper.getTextMaxHealthInvalidArgs());
             return false;
         }
 
@@ -71,32 +68,19 @@ public class SetMaxHealthCommand implements CommandExecutor {
             targetPlayer = Bukkit.getPlayerExact(playerString);
         }
         if ( targetPlayer == null ) {
-            sender.sendMessage(ChatHelper.chat(
-                    plugin.getConfig()
-                            .getString("playernotfound_message")
-                            .replace("<player>", playerString)
-            ));
+            toSender.message("The player with the name " + playerString + " cannot be found on the server.");
             return false;
         }
+        var toTarget = new PlayerMessageManager(targetPlayer);
 
         var success = healthManager.setMaxHearts(targetPlayer, hearts);
         if ( success ) {
-            sender.sendMessage(ChatHelper.chat(
-                    plugin.getConfig()
-                            .getString("maxhealth_setsuccess_message")
-                            .replace("<player>", playerString)
-            ));
-            targetPlayer.sendMessage(ChatHelper.chat(
-                    plugin.getConfig()
-                            .getString("maxhealth_healthset_message")
-            ));
-            PlayerMessageManager.getInstance().sendNextHeartMessage(targetPlayer);
+            toSender.message("The max health has been set for" + playerString);
+            toTarget.message("Your max health has been changed");
+            toTarget.sendNextHeartMessage();
             return true;
         } else {
-            sender.sendMessage(ChatHelper.chat(
-                    plugin.getConfig()
-                            .getString("maxhealth_invalidhearts_message")
-            ));
+            toSender.message(ConfigHelper.getTextMaxHealthInvalidHearts());
             return false;
         }
 

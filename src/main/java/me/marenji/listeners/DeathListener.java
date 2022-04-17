@@ -21,29 +21,21 @@ public class DeathListener implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
+        var player = event.getEntity();
         var healthManager = PlayerHealthManager.getInstance();
-        var messagePlayer = PlayerMessageManager.getInstance();
         var plugin = TransmutePlugin.getInstance();
+        var toPlayer = new PlayerMessageManager(player);
+
         if ( healthManager.isPlayerImmuneToPenalty(player) ) {
-            player.sendMessage(ChatHelper.chat(
-                    plugin.getConfig()
-                            .getString("maxhealth_immunepenalty_message")
-            ));
+            toPlayer.message("You have died. Your max health penalty is on cooldown, so you have not lost a heart");
         } else {
             if ( healthManager.applyDefaultHeartLoss(player) ) {
-                player.sendMessage(ChatHelper.chat(
-                        plugin.getConfig()
-                                .getString("maxhealth_healthlost_message")
-                ));
+                toPlayer.message("You have died. You have returned, but you have one less heart");
             } else {
-                player.sendMessage(ChatHelper.chat(
-                        plugin.getConfig()
-                                .getString("maxhealth_healthminimum_message")
-                ));
+                toPlayer.message("You have died. You have no hearts left, so you have not lost a heart");
             }
         }
-        messagePlayer.sendNextHeartMessage(player);
+        new PlayerMessageManager(player).sendNextHeartMessage();
     }
 
 }

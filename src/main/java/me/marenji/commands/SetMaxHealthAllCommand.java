@@ -2,7 +2,9 @@ package me.marenji.commands;
 
 import me.marenji.TransmutePlugin;
 import me.marenji.player.PlayerHealthManager;
+import me.marenji.player.PlayerMessageManager;
 import me.marenji.util.ChatHelper;
+import me.marenji.util.ConfigHelper;
 import me.marenji.util.PermissionsHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -22,10 +24,10 @@ public class SetMaxHealthAllCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        var messager = new PlayerMessageManager(sender);
+
         if ( !PermissionsHelper.isSenderAdmin(sender) ) {
-            sender.sendMessage(ChatHelper.chat(
-                    plugin.getConfig().getString("notadmin_message")
-            ));
+            messager.message(ConfigHelper.getTextNotAdmin());
             return false;
         }
 
@@ -37,9 +39,7 @@ public class SetMaxHealthAllCommand implements CommandExecutor {
 
         // no arguments specified
         if ( heartsString == null ) {
-            sender.sendMessage(ChatHelper.chat(
-                    plugin.getConfig().getString("maxhealthall_invalidargs_message")
-            ));
+            messager.message(ConfigHelper.getTextMaxHealthAllInvalidArgs());
             return false;
         }
 
@@ -47,26 +47,16 @@ public class SetMaxHealthAllCommand implements CommandExecutor {
         try {
             hearts = Integer.parseInt(heartsString);
         } catch (Exception e) {
-            sender.sendMessage(ChatHelper.chat(
-                    plugin.getConfig().getString("maxhealthall_invalidargs_message")
-            ));
+            messager.message(ConfigHelper.getTextMaxHealthAllInvalidArgs());
             return false;
         }
 
         var success = healthManager.setMaxHeartsAllPlayers(hearts);
         if ( success ) {
-            Bukkit.broadcastMessage(
-                    ChatHelper.chat(
-                            plugin.getConfig()
-                                    .getString("maxhealthall_setsuccess_message")
-                    )
-            );
+            Bukkit.broadcastMessage("All online players have had their max health set to a new value");
             return true;
         } else {
-            sender.sendMessage(ChatHelper.chat(
-                    plugin.getConfig()
-                            .getString("maxhealth_invalidhearts_message")
-            ));
+            messager.message(ConfigHelper.getTextMaxHealthInvalidHearts());
             return false;
         }
     }

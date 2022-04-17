@@ -1,39 +1,29 @@
 package me.marenji.player;
 
-import me.marenji.TransmutePlugin;
 import me.marenji.transmutables.TransmutableManager;
-import me.marenji.util.ConfigHelper;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 public final class PlayerMessageManager {
 
-    private static PlayerMessageManager single_instance = null;
+    private CommandSender sender;
 
-    public PlayerMessageManager() {
+    public PlayerMessageManager(CommandSender player) {
+        this.sender = player;
     }
 
-    public static PlayerMessageManager getInstance()
-    {
-        if (single_instance == null) {
-            single_instance = new PlayerMessageManager();
+    public void sendNextHeartMessage() {
+        var message = "You must destroy a new type of block with a Golden Pickaxe to gain another heart.";
+        if (sender instanceof  Player) {
+            var currentHearts = PlayerHealthManager.getInstance().getMaxHearts((Player)sender);
+            message = TransmutableManager.getInstance().getNextHeartTransmutableMessage(currentHearts);
         }
-        return single_instance;
+        message(message);
     }
 
-    public void sendNextHeartMessage(Player player) {
-        var currentHearts = PlayerHealthManager.getInstance().getMaxHearts(player);
-        var message = TransmutableManager.getInstance().getNextHeartTransmutableMessage(currentHearts);
-        message(player, message);
-    }
-
-    private void message(Player player, String text) {
-        player.sendMessage(
+    public void message(String text) {
+        sender.sendMessage(
             ChatColor.translateAlternateColorCodes('&', text)
         );
     }
