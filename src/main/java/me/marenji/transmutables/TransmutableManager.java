@@ -45,9 +45,12 @@ public final class TransmutableManager {
         }
     }
 
-    public Transmutable getTransmutable(Material material) {
+    public Transmutable getTransmutable(Material material, int level) {
         if (isHeartTransmutable(material)) {
-            return getHeartTransmutable(material);
+            var heartTransmutable = getHeartTransmutable(material);
+            if (heartTransmutable.getLevelRequired() == level) {
+                return heartTransmutable;
+            }
         }
 
         if (isTreasureTransmutable(material)) {
