@@ -1,6 +1,7 @@
 package me.marenji.listeners;
 
 import me.marenji.TransmutePlugin;
+import me.marenji.player.PlayerHealthManager;
 import me.marenji.transmutables.TransmutableManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -24,7 +25,10 @@ public class BlockBreakListener implements Listener {
         var blockBrokenType = event.getBlock().getType();
         handleRareOreLogging(event);
 
-        var transmutable = TransmutableManager.getInstance().getTransmutable(blockBrokenType);
+        var player = event.getPlayer();
+        var playerHealthManager = PlayerHealthManager.getInstance();
+        var playerLevel = playerHealthManager.getMaxHearts(player);
+        var transmutable = TransmutableManager.getInstance().getTransmutable(blockBrokenType, playerLevel);
         if (transmutable == null) return;
         transmutable.transmute(event);
     }

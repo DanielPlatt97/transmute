@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -11,7 +12,7 @@ public final class TreasureManager {
 
     private static TreasureManager single_instance = null;
 
-    private Map<Material, ItemStack[]> treasuresByMaterial;
+    private HashMap<Material, ItemStack[]> treasuresByMaterial;
     private ItemStack fortuneIronPick;
     private ItemStack mendingGoldSword;
 
@@ -49,20 +50,21 @@ public final class TreasureManager {
         var coalList = getCoalList();
         var goldList = getGoldList();
         var ironList = getIronList();
+        var diamondList = getDiamondList();
 
-        treasuresByMaterial = Map.of(
-            Material.HAY_BLOCK, hayList,
-            Material.COAL_BLOCK, coalList,
-            Material.COPPER_BLOCK, copperList,
-            Material.EXPOSED_COPPER, copperList,
-            Material.WEATHERED_COPPER, copperList,
-            Material.OXIDIZED_COPPER, copperList,
-            Material.LAPIS_BLOCK, copperList,
-            Material.REDSTONE_BLOCK, copperList,
-            Material.EMERALD_BLOCK, copperList
-        );
+        treasuresByMaterial = new HashMap<>();
+        treasuresByMaterial.put(Material.HAY_BLOCK, hayList);
+        treasuresByMaterial.put(Material.COAL_BLOCK, coalList);
+        treasuresByMaterial.put(Material.COPPER_BLOCK, copperList);
+        treasuresByMaterial.put(Material.EXPOSED_COPPER, copperList);
+        treasuresByMaterial.put(Material.WEATHERED_COPPER, copperList);
+        treasuresByMaterial.put(Material.OXIDIZED_COPPER, copperList);
+        treasuresByMaterial.put(Material.LAPIS_BLOCK, copperList);
+        treasuresByMaterial.put(Material.REDSTONE_BLOCK, copperList);
+        treasuresByMaterial.put(Material.EMERALD_BLOCK, copperList);
         treasuresByMaterial.put(Material.GOLD_BLOCK, goldList);
         treasuresByMaterial.put(Material.IRON_BLOCK, ironList);
+        treasuresByMaterial.put(Material.DIAMOND_BLOCK, diamondList);
     }
 
     private ItemStack[] getCopperList() {
@@ -119,6 +121,7 @@ public final class TreasureManager {
             new ItemStack(Material.TROPICAL_FISH_SPAWN_EGG, 5),
             new ItemStack(Material.PUFFERFISH_SPAWN_EGG, 1),
             new ItemStack(Material.AXOLOTL_SPAWN_EGG, 1),
+            new ItemStack(Material.SPONGE, 1),
         };
     }
 
@@ -205,7 +208,7 @@ public final class TreasureManager {
             new ItemStack(Material.DIRT, 64),
             new ItemStack(Material.NETHERRACK, 32),
             new ItemStack(Material.SAND, 46),
-            new ItemStack(Material.BRICK_WALL, 64),
+            new ItemStack(Material.BRICKS, 64),
             new ItemStack(Material.LAVA_BUCKET, 1),
             new ItemStack(Material.LANTERN, 1),
             new ItemStack(Material.BAT_SPAWN_EGG, 1),
@@ -255,7 +258,7 @@ public final class TreasureManager {
             new ItemStack(Material.BLAZE_SPAWN_EGG, 1),
             new ItemStack(Material.GHAST_SPAWN_EGG, 1),
             new ItemStack(Material.EMERALD, 18),
-            new ItemStack(Material.ANCIENT_DEBRIS, 1),
+            new ItemStack(Material.NETHERITE_SCRAP, 1),
             new ItemStack(Material.DIAMOND, 2),
             new ItemStack(Material.FLINT, 30),
             new ItemStack(Material.MAGMA_CREAM, 7),
@@ -267,6 +270,7 @@ public final class TreasureManager {
             new ItemStack(Material.GOLDEN_HORSE_ARMOR, 1),
             new ItemStack(Material.GLOW_SQUID_SPAWN_EGG, 1),
             new ItemStack(Material.HEART_OF_THE_SEA, 1),
+            new ItemStack(Material.SPONGE, 2),
         };
     }
 
@@ -299,7 +303,7 @@ public final class TreasureManager {
             new ItemStack(Material.GOAT_SPAWN_EGG, 1),
             new ItemStack(Material.LLAMA_SPAWN_EGG, 1),
             new ItemStack(Material.EMERALD, 18),
-            new ItemStack(Material.ANCIENT_DEBRIS, 1),
+            new ItemStack(Material.NETHERITE_SCRAP, 1),
             new ItemStack(Material.DIAMOND, 2),
             new ItemStack(Material.FLINT, 30),
             new ItemStack(Material.SLIME_BALL, 20),
@@ -312,6 +316,23 @@ public final class TreasureManager {
             new ItemStack(Material.DIAMOND_BOOTS, 1),
             new ItemStack(Material.IRON_HORSE_ARMOR, 1),
             new ItemStack(Material.WITHER_SKELETON_SKULL, 1),
+            new ItemStack(Material.SPONGE, 3),
+        };
+    }
+
+    private ItemStack[] getDiamondList() {
+        return new ItemStack[]{
+            new ItemStack(Material.VILLAGER_SPAWN_EGG, 6),
+            new ItemStack(Material.DIAMOND_BLOCK, 2),
+            new ItemStack(Material.EMERALD, 64),
+            new ItemStack(Material.NETHERITE_SCRAP, 2),
+            new ItemStack(Material.HEART_OF_THE_SEA, 1),
+            new ItemStack(Material.DIAMOND_HORSE_ARMOR, 1),
+            new ItemStack(Material.WITHER_SKELETON_SKULL, 3),
+            new ItemStack(Material.CREEPER_HEAD, 1),
+            new ItemStack(Material.MUSIC_DISC_STAL, 1),
+            new ItemStack(Material.DRAGON_EGG, 1),
+            new ItemStack(Material.SPONGE, 5),
         };
     }
 

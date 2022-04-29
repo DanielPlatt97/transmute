@@ -21,6 +21,7 @@ public class TreasureTransmutable extends Transmutable{
         var block = event.getBlock();
         var location = block.getLocation();
         var world = block.getWorld();
+        event.setDropItems(false);
         world.dropItem(location, droppedItem);
         return true;
     }
