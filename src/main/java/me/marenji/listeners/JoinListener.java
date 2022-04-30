@@ -38,7 +38,6 @@ public class JoinListener implements Listener {
         healthManager.applyPenaltyImmunity(player);
         var toPlayer = new PlayerMessageManager(player);
         toPlayer.message(ConfigHelper.getTextPlayerJoined());
-        toPlayer.sendNextHeartMessage();
     }
 
 }

@@ -37,7 +37,7 @@ public class BlockBreakListener implements Listener {
         var blockBrokenType = event.getBlock().getType();
         ChatColor colour;
         String oreName;
-        if (blockBrokenType == Material.DIAMOND_ORE) {
+        if (blockBrokenType == Material.DIAMOND_ORE || blockBrokenType == Material.DEEPSLATE_DIAMOND_ORE) {
             colour = ChatColor.BLUE;
             oreName = "diamond ore";
         } else if (blockBrokenType == Material.ANCIENT_DEBRIS) {

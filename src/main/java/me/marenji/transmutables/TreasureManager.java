@@ -60,7 +60,6 @@ public final class TreasureManager {
         treasuresByMaterial.put(Material.WEATHERED_COPPER, copperList);
         treasuresByMaterial.put(Material.OXIDIZED_COPPER, copperList);
         treasuresByMaterial.put(Material.LAPIS_BLOCK, copperList);
-        treasuresByMaterial.put(Material.REDSTONE_BLOCK, copperList);
         treasuresByMaterial.put(Material.EMERALD_BLOCK, copperList);
         treasuresByMaterial.put(Material.GOLD_BLOCK, goldList);
         treasuresByMaterial.put(Material.IRON_BLOCK, ironList);
@@ -79,7 +78,7 @@ public final class TreasureManager {
             new ItemStack(Material.GLOWSTONE_DUST, 10),
             new ItemStack(Material.COAL, 18),
             new ItemStack(Material.STICK, 32),
-            new ItemStack(Material.BRICK_WALL, 64),
+            new ItemStack(Material.BRICKS, 64),
             new ItemStack(Material.CLAY_BALL, 12),
             new ItemStack(Material.DIAMOND, 1),
             new ItemStack(Material.PUMPKIN, 3),
@@ -105,11 +104,9 @@ public final class TreasureManager {
             new ItemStack(Material.BLAZE_ROD, 2),
             new ItemStack(Material.ENDER_EYE, 2),
             new ItemStack(Material.ORANGE_BED, 1),
-            new ItemStack(Material.DIAMOND_SWORD, 1),
             new ItemStack(Material.TNT, 3),
             new ItemStack(Material.COPPER_BLOCK, 2),
-            new ItemStack(Material.LAPIS_BLOCK, 2),
-            new ItemStack(Material.REDSTONE_BLOCK, 2),
+            new ItemStack(Material.REDSTONE_BLOCK, 1),
             new ItemStack(Material.CREEPER_SPAWN_EGG, 1),
             new ItemStack(Material.ZOMBIE_SPAWN_EGG, 5),
             new ItemStack(Material.SKELETON_SPAWN_EGG, 3),
@@ -155,7 +152,7 @@ public final class TreasureManager {
             new ItemStack(Material.CHICKEN_SPAWN_EGG, 1),
             new ItemStack(Material.SUGAR_CANE, 3),
             new ItemStack(Material.EMERALD, 1),
-            new ItemStack(Material.BRICK_WALL, 64),
+            new ItemStack(Material.BRICKS, 64),
             new ItemStack(Material.WATER_BUCKET, 1),
             new ItemStack(Material.GRASS_BLOCK, 3),
             new ItemStack(Material.LEATHER, 8),
@@ -243,7 +240,7 @@ public final class TreasureManager {
             new ItemStack(Material.GLOWSTONE_DUST, 30),
             new ItemStack(Material.COAL, 30),
             new ItemStack(Material.CLAY_BALL, 64),
-            new ItemStack(Material.BRICK_WALL, 64),
+            new ItemStack(Material.BRICKS, 64),
             new ItemStack(Material.LAVA_BUCKET, 1),
             new ItemStack(Material.EXPERIENCE_BOTTLE, 9),
             new ItemStack(Material.BLAZE_ROD, 3),
@@ -271,6 +268,7 @@ public final class TreasureManager {
             new ItemStack(Material.GLOW_SQUID_SPAWN_EGG, 1),
             new ItemStack(Material.HEART_OF_THE_SEA, 1),
             new ItemStack(Material.SPONGE, 2),
+            new ItemStack(Material.TOTEM_OF_UNDYING, 1),
         };
     }
 
@@ -288,7 +286,7 @@ public final class TreasureManager {
             new ItemStack(Material.NETHER_WART, 30),
             new ItemStack(Material.COAL, 30),
             new ItemStack(Material.PAPER, 42),
-            new ItemStack(Material.BRICK_WALL, 64),
+            new ItemStack(Material.BRICKS, 64),
             new ItemStack(Material.LAVA_BUCKET, 1),
             new ItemStack(Material.EXPERIENCE_BOTTLE, 9),
             new ItemStack(Material.BLAZE_ROD, 3),
@@ -317,6 +315,7 @@ public final class TreasureManager {
             new ItemStack(Material.IRON_HORSE_ARMOR, 1),
             new ItemStack(Material.WITHER_SKELETON_SKULL, 1),
             new ItemStack(Material.SPONGE, 3),
+            new ItemStack(Material.TOTEM_OF_UNDYING, 1),
         };
     }
 
@@ -333,6 +332,7 @@ public final class TreasureManager {
             new ItemStack(Material.MUSIC_DISC_STAL, 1),
             new ItemStack(Material.DRAGON_EGG, 1),
             new ItemStack(Material.SPONGE, 5),
+            new ItemStack(Material.TOTEM_OF_UNDYING, 1),
         };
     }
 
