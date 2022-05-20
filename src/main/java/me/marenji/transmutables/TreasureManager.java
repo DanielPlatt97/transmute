@@ -180,8 +180,9 @@ public final class TreasureManager {
 
     private ItemStack[] getCoalList() {
         return new ItemStack[]{
-            new ItemStack(Material.REDSTONE, 10),
-            new ItemStack(Material.REDSTONE, 10),
+            new ItemStack(Material.VILLAGER_SPAWN_EGG, 1),
+            new ItemStack(Material.VILLAGER_SPAWN_EGG, 1),
+            new ItemStack(Material.VILLAGER_SPAWN_EGG, 1),
             new ItemStack(Material.REDSTONE, 10),
             new ItemStack(Material.LAPIS_LAZULI, 10),
             new ItemStack(Material.GUNPOWDER, 10),
@@ -223,6 +224,14 @@ public final class TreasureManager {
             new ItemStack(Material.TROPICAL_FISH_SPAWN_EGG, 5),
             new ItemStack(Material.PUFFERFISH_SPAWN_EGG, 1),
             new ItemStack(Material.AXOLOTL_SPAWN_EGG, 1),
+            new ItemStack(Material.DIAMOND_SWORD, 1),
+            new ItemStack(Material.DIAMOND_PICKAXE, 1),
+            new ItemStack(Material.DIAMOND_AXE, 1),
+            new ItemStack(Material.GOLDEN_HORSE_ARMOR, 1),
+            new ItemStack(Material.GLOW_SQUID_SPAWN_EGG, 1),
+            new ItemStack(Material.HEART_OF_THE_SEA, 1),
+            new ItemStack(Material.SPONGE, 2),
+            new ItemStack(Material.TOTEM_OF_UNDYING, 1),
         };
     }
 
@@ -255,8 +264,6 @@ public final class TreasureManager {
             new ItemStack(Material.BLAZE_SPAWN_EGG, 1),
             new ItemStack(Material.GHAST_SPAWN_EGG, 1),
             new ItemStack(Material.EMERALD, 18),
-            new ItemStack(Material.NETHERITE_SCRAP, 1),
-            new ItemStack(Material.DIAMOND, 2),
             new ItemStack(Material.FLINT, 30),
             new ItemStack(Material.MAGMA_CREAM, 7),
             new ItemStack(Material.GHAST_TEAR, 5),
@@ -274,7 +281,6 @@ public final class TreasureManager {
 
     private ItemStack[] getIronList() {
         return new ItemStack[]{
-            new ItemStack(Material.VILLAGER_SPAWN_EGG, 1),
             new ItemStack(Material.VILLAGER_SPAWN_EGG, 1),
             new ItemStack(Material.VILLAGER_SPAWN_EGG, 1),
             new ItemStack(Material.REDSTONE, 30),
@@ -301,21 +307,13 @@ public final class TreasureManager {
             new ItemStack(Material.GOAT_SPAWN_EGG, 1),
             new ItemStack(Material.LLAMA_SPAWN_EGG, 1),
             new ItemStack(Material.EMERALD, 18),
-            new ItemStack(Material.NETHERITE_SCRAP, 1),
-            new ItemStack(Material.DIAMOND, 2),
             new ItemStack(Material.FLINT, 30),
             new ItemStack(Material.SLIME_BALL, 20),
-            new ItemStack(Material.HEART_OF_THE_SEA, 1),
             new ItemStack(Material.TURTLE_EGG, 3),
-            new ItemStack(Material.DIAMOND_CHESTPLATE, 1),
             new ItemStack(Material.DIAMOND_SHOVEL, 1),
-            new ItemStack(Material.DIAMOND_LEGGINGS, 1),
-            new ItemStack(Material.DIAMOND_HELMET, 1),
-            new ItemStack(Material.DIAMOND_BOOTS, 1),
             new ItemStack(Material.IRON_HORSE_ARMOR, 1),
             new ItemStack(Material.WITHER_SKELETON_SKULL, 1),
             new ItemStack(Material.SPONGE, 3),
-            new ItemStack(Material.TOTEM_OF_UNDYING, 1),
         };
     }
 
@@ -331,7 +329,7 @@ public final class TreasureManager {
             new ItemStack(Material.CREEPER_HEAD, 1),
             new ItemStack(Material.MUSIC_DISC_STAL, 1),
             new ItemStack(Material.DRAGON_EGG, 1),
-            new ItemStack(Material.SPONGE, 5),
+            new ItemStack(Material.SPONGE, 10),
             new ItemStack(Material.TOTEM_OF_UNDYING, 1),
         };
     }
